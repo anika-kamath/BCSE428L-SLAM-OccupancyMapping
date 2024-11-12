@@ -2,7 +2,7 @@
 
 ## Description
 
-Implementation of Software Simulation as a part of the Digital Assignments for the course BCSE306L - Artificial Intelligence
+Implementation of Software Simulation as a part of the Digital Assignments for the course BCSE428L - Autonomous Drones
 - Review 1: Includes PPT for Initial Review
 - Review 2: 2D Occupancy Mapping and Real Time Drone Position Visualization
 - Review 3: 3D Occupancy Mapping using Depth and Error Measurement to Calculate a Real-Time Occupancy Map
