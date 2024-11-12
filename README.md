@@ -134,7 +134,7 @@ The **first snippet** initializes the stereo camera system with calibration para
    Parameters
    ```
    ```
-   sim('OccupancyGridSimulation)
+   sim('OccupancyGridSimulation')
    ```
 
 
