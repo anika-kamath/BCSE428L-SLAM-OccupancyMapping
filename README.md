@@ -50,14 +50,62 @@ The second snippet focuses on **Simultaneous Localization and Mapping (SLAM)** w
 ### Summary
 The **first snippet** builds a **grid-based occupancy map** to identify free and occupied spaces with discrete cells. In contrast, the **second snippet** uses **feature-based SLAM**, focusing on recognizing and mapping features (landmarks) in continuous 2D space, allowing it to estimate the drone’s position and path while mapping these landmarks. Both snippets provide simplified versions of SLAM suitable for autonomous drones navigating in 2D.
 
+Review 3
+---
+
+### 1: Stereo Camera Calibration and Parameter Initialization
+
+This snippet defines **parameters for a stereo camera system** and calculates the reprojection matrix needed for depth estimation.
+
+1. **Global Variables**: The snippet defines switches for controlling disparity, 3D point calculations, and ORB (Oriented FAST and Rotated BRIEF) feature extraction.
+
+2. **Camera Calibration Parameters**:
+   - `focalLength`: Sets the focal length for the stereo cameras in pixels.
+   - `principalPoint`: Defines the principal point (center of the image sensor) in pixels.
+   - `imageSize`: Defines the resolution of the camera images.
+   - `baseline`: The distance between the left and right cameras (0.2 meters).
+   
+3. **Reprojection Matrix Calculation**:
+   - This matrix (`reprojectionMatrix`) is essential for converting 2D disparities between the stereo images into 3D coordinates, enabling depth calculation.
+   - The matrix uses `focalLength`, `principalPoint`, and `baseline` to calculate how far each point is in 3D space.
+
+**Outcome**: This snippet sets up the intrinsic and extrinsic parameters necessary for computing depth from stereo images by using disparity between the two images.
+
+---
+
+### 2: Disparity and 3D Point Cloud Mapping
+
+This function (`DisparityMatlab2`) calculates the **disparity between stereo images** and uses this information to create a 3D occupancy map.
+
+1. **Persistent 3D Map Initialization**: 
+   - An empty 3D occupancy map (`map3D2`) is initialized once. This map stores the 3D points generated from stereo depth data over time.
+   
+2. **Stereo Image Rectification and Disparity Calculation**:
+   - Left and right images are rectified to align them horizontally, ensuring accurate depth estimation.
+   - The function converts images to grayscale, then calculates the disparity map (difference in pixel positions of objects between the two images).
+   
+3. **Depth Calculation**:
+   - Uses the disparity map and reprojection matrix to calculate the depth of each pixel. This depth map shows the distance from the camera to each object in the scene.
+   - Errors between true ground depth and calculated depth are also calculated and visualized.
+
+4. **3D Point Cloud Generation and Filtering**:
+   - The `reconstructScene` function uses the disparity map and reprojection matrix to create a 3D point cloud, representing the scene in 3D coordinates.
+   - The point cloud is filtered to remove noise and downsampled for efficiency. Valid points are added to the 3D occupancy map (`map3D2`), where they contribute to an updated 3D model of the environment.
+
+5. **Depth Overlay**: 
+   - Depth values are mapped to an RGB image for visualization, with `y` representing the depth overlay and `err` representing error visualizations.
+
+**Outcome**: This function generates and updates a 3D occupancy map of the environment by calculating depth from stereo images and inserting the 3D points into the map, allowing visualization of the scene in 3D space.
+
+---
+
+### Summary
+The **first snippet** initializes the stereo camera system with calibration parameters and calculates the reprojection matrix necessary for depth calculation. The **second snippet** applies these parameters in a function that calculates disparity, generates a 3D point cloud, and updates a 3D occupancy map, providing a visual 3D reconstruction of the environment. Together, they simulate a stereo vision-based SLAM system capable of depth sensing and mapping.
+
 
 ## Software Used
 
 - Matlab Simulink
-
-## Features
-
-- 
 
 ## Prerequisites
 
