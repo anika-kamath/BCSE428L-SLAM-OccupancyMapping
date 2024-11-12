@@ -9,7 +9,8 @@ Implementation of Software Simulation as a part of the Digital Assignments for t
 
 ## Overview
 
-### Review 1
+Review 1
+---
 These two code snippets simulate two different approaches to 2D mapping and localization for an autonomous drone:
 
 ### 1: 2D Occupancy Grid Mapping with SLAM Loop
